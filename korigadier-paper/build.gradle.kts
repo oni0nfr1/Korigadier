@@ -1,22 +1,14 @@
 plugins {
-    kotlin("jvm") version "2.2.0"
-}
-
-group = "io.github.oni0nfr1"
-version = "unspecified"
-
-repositories {
-    mavenCentral()
-    maven("https://repo.papermc.io/repository/maven-public/")
+    alias(libs.plugins.kotlin.jvm)
+    `java-library`
+    `maven-publish`
 }
 
 dependencies {
+    api(project(":korigadier"))   // 코어(= API+internal)에 의존
+    compileOnly(libs.paper.api)   // 서버가 제공함 → compileOnly
     testImplementation(kotlin("test"))
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
-kotlin {
-    jvmToolchain(21)
-}
+kotlin { jvmToolchain(21) }
+java { withSourcesJar(); withJavadocJar() }

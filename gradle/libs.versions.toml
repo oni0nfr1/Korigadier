@@ -1,19 +1,15 @@
 [versions]
-kotlin = "2.2.0"
-junit = "5.13.4" #테스트용
+kotlin = "2.0.21"
 brigadier = "1.0.18"
-paper = "1.21.6-R0.1-SNAPSHOT" #paper와의 호환 지원에만. 코어에는 없음
-mockbukkit = "v1.21" #테스트용
-dokka = "2.0.0" #docs에만 사용
+paper = "1.21.8-R0.1-SNAPSHOT"
+junit = "5.10.2"
 
 [libraries]
 brigadier = { module = "com.mojang:brigadier", version.ref = "brigadier" }
-paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper" } #paper와의 호환 지원에만. 코어에는 없음
-mockbukkit = { module = "com.github.seeseemelk:MockBukkit-v1.21", version.ref = "mockbukkit" } #테스트용
-junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" } #테스트용
-junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" } #테스트용
+paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper" }
+junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 
 [plugins]
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version = "${versions.kotlin}" }
-dokka      = { id = "org.jetbrains.dokka",       version = "${versions.dokka}" } #docs에만 사용
-shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" } #샘플 플러그인에만 사용
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }

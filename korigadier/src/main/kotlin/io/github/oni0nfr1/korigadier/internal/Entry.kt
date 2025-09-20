@@ -3,7 +3,6 @@ package io.github.oni0nfr1.korigadier.internal
 import com.mojang.brigadier.CommandDispatcher
 import io.github.oni0nfr1.korigadier.api.KRootScope
 import io.github.oni0nfr1.korigadier.internal.compiler.KCompiler
-import io.github.oni0nfr1.korigadier.internal.spec.KRootScopeImpl
 import io.github.oni0nfr1.korigadier.internal.validate.KValidator
 
 internal object Entry {

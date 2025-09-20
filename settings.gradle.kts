@@ -1,4 +1,5 @@
 rootProject.name = "Korigadier"
 
-include("korigadier-core")
+include("korigadier")
 include("korigadier-paper")
+include("examples:paper-sample")
