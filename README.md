@@ -8,3 +8,5 @@
 Korigadier는 Brigadier를 Kotlin 스타일 DSL로 래핑하여, 명령어를 훨씬 간결하고 읽기 쉽게 작성할 수 있도록 합니다.
 
 (일단은 제 개인 프로젝트의 편의를 위해 만든 API이며, 학습의 목적도 다분히 있음을 알려 드립니다.)
+
+API는 라이선스가 MIT이나, 브릿지가 포함된 korigadier-paper는 GPL-3입니다.

@@ -15,15 +15,16 @@ internal object KCompiler {
     }
 
     private fun <S> compileLiteral(spec: KLiteralSpec<S>): CommandNode<S> {
-        val b = LiteralArgumentBuilder.literal<S>(spec.name)
+        val b = LiteralArgumentBuilder.literal<S>(spec.name) // 빌더 생성
 
         if (spec.predicates.isNotEmpty()) {
             b.requires { s -> spec.predicates.all { it(s) } }
-        }
-        spec.exec?.let { exec -> b.executes { ctx -> exec(ctx) } }
+        } // 권한 제한 적용
 
-        spec.children.forEach { child -> b.then(compileNode(child)) }
-        return b.build()
+        spec.exec?.let { exec -> b.executes { ctx -> exec(ctx) } } // 실행 로직 적용
+
+        spec.children.forEach { child -> b.then(compileNode(child)) } // 하위 노드도 연쇄 컴파일
+        return b.build() //빌드하여 마무리
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -35,6 +36,9 @@ internal object KCompiler {
 
     private fun <S> compileArgument(spec: KArgumentSpec<S, Any?>): CommandNode<S> {
         val b = RequiredArgumentBuilder.argument<S, Any?>(spec.name, spec.type)
+        if (spec.predicates.isNotEmpty()) {
+            b.requires { s -> spec.predicates.all { it(s) } }
+        } // 권한 제한 적용
 
         spec.suggests?.let { provider ->
             b.suggests { ctx, builder ->
@@ -42,10 +46,11 @@ internal object KCompiler {
                 provider(builder, ctx.source as S)
                 java.util.concurrent.CompletableFuture.completedFuture(builder.build())
             }
-        }
-        spec.exec?.let { exec -> b.executes { ctx -> exec(ctx) } }
+        } // 추천 적용
 
-        spec.children.forEach { child -> b.then(compileNode(child)) }
+        spec.exec?.let { exec -> b.executes { ctx -> exec(ctx) } } // 실행 로직 적용
+
+        spec.children.forEach { child -> b.then(compileNode(child)) } // 하위 노드도 연쇄 컴파일
         return b.build()
     }
 }

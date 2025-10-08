@@ -8,4 +8,5 @@ typealias KExec<S> = (CommandContext<S>) -> Int
 interface KRootScope<S> {
     val dispatcher: CommandDispatcher<S>
     fun literal(name: String, block: KLiteralBuilder<S>.() -> Unit)
+    fun include(fragment: Fragment<S>) { fragment.attachTo(this) }
 }

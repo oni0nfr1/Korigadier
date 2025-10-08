@@ -15,6 +15,7 @@ class Commands(plugin: JavaPlugin) {
     val createAndInvite: Fragment<CommandSourceStack> = fragment {
         literal("create") {
             argument("name", Args.word()) {
+                requires { it.sender.isOp }
                 executes(this@Commands::teamCreate)
             }
         }

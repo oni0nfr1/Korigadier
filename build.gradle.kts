@@ -1,7 +1,7 @@
 plugins { `maven-publish`; signing }
 
 allprojects {
-    group = "dev.onionfri.korigadier"
+    group = "io.github.oni0nfr1.korigadier"
     version = "0.1.0"
     repositories {
         mavenCentral()
