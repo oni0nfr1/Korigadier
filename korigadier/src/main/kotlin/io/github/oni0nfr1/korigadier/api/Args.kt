@@ -3,7 +3,7 @@ package io.github.oni0nfr1.korigadier.api
 import com.mojang.brigadier.arguments.*
 
 /** 표준 Brigadier 인자 타입 팩토리 모음 */
-object args {
+object Args {
     fun word(): StringArgumentType = StringArgumentType.word()
     fun greedy(): StringArgumentType = StringArgumentType.greedyString()
     fun string(): StringArgumentType = StringArgumentType.string()

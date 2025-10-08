@@ -1,6 +1,7 @@
 package io.github.oni0nfr1.korigadier.internal
 
 import com.mojang.brigadier.arguments.ArgumentType
+import io.github.oni0nfr1.korigadier.api.Fragment
 import io.github.oni0nfr1.korigadier.api.KArgumentBuilder
 import io.github.oni0nfr1.korigadier.api.KExec
 import io.github.oni0nfr1.korigadier.api.KLiteralBuilder
@@ -30,6 +31,11 @@ internal class KLiteralBuilderImpl<S>(
     override fun literal(name: String, block: KLiteralBuilder<S>.() -> Unit) = apply {
         val child = KLiteralBuilderImpl<S>(name).apply(block).spec
         spec.children += child
+    }
+
+    override fun include(fragment: Fragment<S>): KLiteralBuilder<S> {
+        fragment.attachTo(this)
+        return this
     }
 
     override fun meta(description: String?, examples: List<String>) = apply {

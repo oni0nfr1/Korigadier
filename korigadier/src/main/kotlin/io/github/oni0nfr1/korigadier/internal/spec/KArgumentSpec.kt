@@ -10,4 +10,14 @@ internal data class KArgumentSpec<S, T>(
     var suggests: ((SuggestionsBuilder, S) -> Unit)? = null,
     var exec: KExec<S>? = null,
     val children: MutableList<KNodeSpec<S>> = mutableListOf()
-) : KNodeSpec<S>
+) : KNodeSpec<S> {
+    @Suppress("UNCHECKED_CAST")
+    fun deepCopyAny(): KArgumentSpec<S, Any?> =
+    KArgumentSpec(
+        name = name,
+        type = type, // ArgumentType<T>는 보통 상태가 없어서 공유 OK
+        suggests = suggests,
+        exec = exec,
+        children = children.map { it.deepCopy() }.toMutableList()
+    ) as KArgumentSpec<S, Any?>
+}

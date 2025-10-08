@@ -11,6 +11,7 @@ interface KLiteralBuilder<S> {
         block: KArgumentBuilder<S, T>.() -> Unit = {}
     ): KLiteralBuilder<S>
     fun literal(name: String, block: KLiteralBuilder<S>.() -> Unit): KLiteralBuilder<S>
+    fun include(fragment: Fragment<S>): KLiteralBuilder<S>
 
     // 선택: 헬프/문서화를 위한 메타
     fun meta(description: String? = null, examples: List<String> = emptyList()): KLiteralBuilder<S>

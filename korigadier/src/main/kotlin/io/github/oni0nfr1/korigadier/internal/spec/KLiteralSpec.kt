@@ -9,4 +9,14 @@ internal data class KLiteralSpec<S>(
     val children: MutableList<KNodeSpec<S>> = mutableListOf(),
     var description: String? = null,
     var examples: List<String> = emptyList()
-) : KNodeSpec<S>
+) : KNodeSpec<S> {
+    override fun deepCopy(): KLiteralSpec<S> =
+    KLiteralSpec(
+        name = name,
+        predicates = predicates.toMutableList(),
+        exec = exec,
+        children = children.map { it.deepCopy() }.toMutableList(),
+        description = description,
+        examples = examples.toList()
+    )
+}
