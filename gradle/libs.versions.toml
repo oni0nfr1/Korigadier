@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.0.21"
+kotlin = "2.2.20"
 brigadier = "1.0.18"
 paper = "1.21.8-R0.1-SNAPSHOT"
 junit = "5.10.2"

@@ -1,36 +1,38 @@
 plugins {
+    id("fabric-loom") version "1.11-SNAPSHOT"
     alias(libs.plugins.kotlin.jvm)
     `java-library`
     `maven-publish`
 }
 
 dependencies {
-    api(libs.brigadier)           // 공개 표면은 Brigadier만 보이게
+    api(project(":korigadier"))
+
+    minecraft("com.mojang:minecraft:1.21.10")
+    mappings(loom.officialMojangMappings())
+
+    modImplementation("net.fabricmc:fabric-loader:0.17.3")
+    modImplementation("net.fabricmc:fabric-language-kotlin:1.13.6+kotlin.2.2.20")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:0.135.0+1.21.10")
+
     testImplementation(kotlin("test"))
-    testImplementation(libs.junit.api)
-    testRuntimeOnly(libs.junit.engine)
 }
 
-kotlin {
-    jvmToolchain(21)
-}
-
-tasks.test { useJUnitPlatform() }
-
+kotlin { jvmToolchain(21) }
 java { withSourcesJar(); withJavadocJar() }
 
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            from(components["java"]) // 표준 java 컴포넌트 퍼블리시
+            from(components["java"])
             pom {
                 name.set(project.name)
                 description.set("Korigadier module: ${project.name}")
-                url.set("https://github.com/taeun06/Korigadier") // 선택
+                url.set("https://github.com/taeun06/Korigadier")
                 licenses {
                     license {
-                        name.set("MIT License")
-                        url.set("https://opensource.org/licenses/MIT")
+                        name.set("MIT")
+                        url.set("https://mit-license.org/")
                     }
                 }
                 developers {
