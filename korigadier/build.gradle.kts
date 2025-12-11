@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
-    `java-library`
-    `maven-publish`
+    id("com.vanniktech.maven.publish") version "0.35.0"
 }
 
 dependencies {
@@ -17,34 +16,38 @@ kotlin {
 
 tasks.test { useJUnitPlatform() }
 
-java { withSourcesJar(); withJavadocJar() }
+mavenPublishing {
+    coordinates(
+        groupId = project.group.toString(),
+        artifactId = "korigadier",
+        version = project.version.toString()
+    )
 
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"]) // 표준 java 컴포넌트 퍼블리시
-            pom {
-                name.set(project.name)
-                description.set("Korigadier module: ${project.name}")
-                url.set("https://github.com/taeun06/Korigadier") // 선택
-                licenses {
-                    license {
-                        name.set("MIT License")
-                        url.set("https://opensource.org/licenses/MIT")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("oni0nfr1")
-                        name.set("Kim Tae Eon") // 실명 싫으면 핸들/브랜드
-                    }
-                }
-                scm {
-                    url.set("https://github.com/oni0nfr1/korigadier")
-                    connection.set("scm:git:https://github.com/oni0nfr1/korigadier.git")
-                    developerConnection.set("scm:git:ssh://git@github.com/oni0nfr1/korigadier.git")
-                }
+    publishToMavenCentral()
+    signAllPublications()
+
+    pom {
+        name.set("Korigadier")
+        description.set("Kotlin wrapper / DSL for Mojang Brigadier")
+        url.set("https://github.com/oni0nfr1/Korigadier")
+
+        licenses {
+            license {
+                name.set("MIT License")
+                url.set("https://opensource.org/licenses/MIT")
             }
+        }
+        developers {
+            developer {
+                id.set("oni0nfr1")
+                name.set("Kim Tae Eon")
+                email.set("taeun06@gmail.com")
+            }
+        }
+        scm {
+            url.set("https://github.com/oni0nfr1/Korigadier")
+            connection.set("scm:git:git://github.com/oni0nfr1/Korigadier.git")
+            developerConnection.set("scm:git:ssh://git@github.com:oni0nfr1/Korigadier.git")
         }
     }
 }

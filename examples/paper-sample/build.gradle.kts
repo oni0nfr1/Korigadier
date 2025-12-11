@@ -5,7 +5,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":korigadier-paper"))
+    implementation("io.github.oni0nfr1:korigadier:1.0.0")
+    implementation("io.github.oni0nfr1:korigadier-paper-1_21_8:1.0.0")
     compileOnly(libs.paper.api)
 }
 
