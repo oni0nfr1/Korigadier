@@ -1,12 +1,68 @@
 # Korigadier
 
-**코틀린을 위한 Brigadier API의 래퍼 라이브러리 (개발 중)**
+**코틀린을 위한 Brigadier API의 래퍼 라이브러리**
 
 모장은 오픈 소스 커맨드 엔진인 Brigadier를 제공합니다.
 그러나 이 API는 Java를 기반으로 설계되어, Kotlin에서는 Kotlin만의 문법상 장점을 충분히 누리지 못합니다.
 
 Korigadier는 Brigadier를 Kotlin 스타일 DSL로 래핑하여, 명령어를 훨씬 간결하고 읽기 쉽게 작성할 수 있도록 합니다.
 
-(일단은 제 개인 프로젝트의 편의를 위해 만든 API이며, 학습의 목적도 다분히 있음을 알려 드립니다.)
+# 사용 방법
+```kotlin
+//build.gradle.kts
+repositories {
+    mavenCentral()
+}
 
-API는 라이선스가 MIT이나, 브릿지가 포함된 korigadier-paper는 GPL-3입니다.
+dependencies {
+    implementation("io.github.oni0nfr1:korigadier-core:1.0.0")
+    implementation("io.github.oni0nfr1:korigadier-fabric-1_21_10:1.0.0")
+    implementation("io.github.oni0nfr1:korigadier-paper-1_21_8:1.0.0")
+}
+```
+```kotlin
+// in Paper Plugin
+lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
+    Korigadier.register(event) {
+        literal("team") {
+            requires { it.sender.hasPermission("team.use") }
+            literal("create") {
+                argument("name", Args.word()) {
+                    requires { it.sender.isOp }
+                    executes { ctx ->
+                        val name = ctx.get<String>("name")
+                        ctx.source.sender.sendMessage("팀 ${name}이 생성되었습니다!")
+                        // 팀 생성 로직...
+                        1
+                    }
+                }
+            }
+
+            literal("invite") {
+                argument("player", ArgumentTypes.player()) {
+                    executes { ctx ->
+                        val targets = ctx.get<PlayerSelectorArgumentResolver>("player")
+                            .resolve(ctx.source)
+                        targets.forEach {
+                                player ->
+                            ctx.source.sender.sendMessage("플레이어 ${player.name}이 초대되었습니다!")
+                        }
+                        // 초대 로직...
+                        1
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+# 주의사항
+라이선스는 기본적으로 MIT 라이선스이나, korigadier-paper 모듈만 GPL-3 라이선스가 적용됩니다.
+```kotlin
+dependencies {
+    implementation("io.github.oni0nfr1:korigadier-core:1.0.0") // MIT
+    implementation("io.github.oni0nfr1:korigadier-fabric-1_21_10:1.0.0") // MIT
+    implementation("io.github.oni0nfr1:korigadier-paper-1_21_8:1.0.0") // GPL-3
+}
+```
