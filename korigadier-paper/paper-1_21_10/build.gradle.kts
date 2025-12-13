@@ -3,9 +3,12 @@ plugins {
     id("com.vanniktech.maven.publish") version "0.35.0"
 }
 
+var mc = "1.21.10"
+var mcUnderscore = mc.replace(".", "_")
+
 dependencies {
-    api(project(":korigadier"))   // 코어(= API+internal)에 의존
-    compileOnly(libs.paper.api)   // 서버가 제공함 → compileOnly
+    api(project(":korigadier"))
+    compileOnly("io.papermc.paper:paper-api:$mc-R0.1-SNAPSHOT")
     testImplementation(kotlin("test"))
 }
 
@@ -14,7 +17,7 @@ kotlin { jvmToolchain(21) }
 mavenPublishing {
     coordinates(
         groupId = project.group.toString(),
-        artifactId = "korigadier-paper-1_21_8",
+        artifactId = "korigadier-paper-$mcUnderscore",
         version = project.version.toString()
     )
 

@@ -1,18 +1,21 @@
 plugins {
-    id("fabric-loom") version "1.11-SNAPSHOT"
+    id("fabric-loom") version "1.14-SNAPSHOT"
     alias(libs.plugins.kotlin.jvm)
     id("com.vanniktech.maven.publish") version "0.35.0"
 }
 
+var mc = "1.21.5"
+var mcUnderscore = mc.replace(".", "_")
+
 dependencies {
     api(project(":korigadier"))
 
-    minecraft("com.mojang:minecraft:1.21.10")
+    minecraft("com.mojang:minecraft:$mc")
     mappings(loom.officialMojangMappings())
 
-    modImplementation("net.fabricmc:fabric-loader:0.17.3")
+    modImplementation("net.fabricmc:fabric-loader:0.18.2")
     modImplementation("net.fabricmc:fabric-language-kotlin:1.13.6+kotlin.2.2.20")
-    modImplementation("net.fabricmc.fabric-api:fabric-api:0.135.0+1.21.10")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:0.128.2+1.21.5")
 
     testImplementation(kotlin("test"))
 }
@@ -23,7 +26,7 @@ mavenPublishing {
     // 이 라이브러리의 좌표 (GAV)
     coordinates(
         groupId = project.group.toString(),
-        artifactId = "korigadier-fabric-1_21_10",
+        artifactId = "korigadier-fabric-$mcUnderscore",
         version = project.version.toString()
     )
 

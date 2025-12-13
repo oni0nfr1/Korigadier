@@ -1,15 +1,15 @@
 [versions]
 kotlin = "2.2.20"
 brigadier = "1.0.18"
-paper = "1.21.8-R0.1-SNAPSHOT"
+korigadier = "1.0.1"
 junit = "5.10.2"
 
 [libraries]
 brigadier = { module = "com.mojang:brigadier", version.ref = "brigadier" }
-paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper" }
+korigadier = { module = "io.github.oni0nfr1:korigadier", version.ref = "korigadier" }
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
+shadow = { id = "com.gradleup.shadow", version = "9.3.0" }

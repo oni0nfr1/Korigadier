@@ -10,10 +10,6 @@ import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEven
 import io.papermc.paper.command.brigadier.CommandSourceStack
 
 object Korigadier {
-    /**
-     * LifecycleEvents.COMMANDS 핸들러에서 넘겨주는 이벤트를 그대로 받아
-     * 임시 디스패처에 DSL을 컴파일하고, registrar로 노드들을 등록.
-     */
     fun register(
         event: ReloadableRegistrarEvent<Commands>,
         block: KRootScope<CommandSourceStack>.() -> Unit

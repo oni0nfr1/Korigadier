@@ -7,22 +7,33 @@
 
 Korigadier는 Brigadier를 Kotlin 스타일 DSL로 래핑하여, 명령어를 훨씬 간결하고 읽기 쉽게 작성할 수 있도록 합니다.
 
+## 지원 버전
+* Paper
+  * 1.21.8
+  * 1.21.10
+* Fabric
+  * 1.21.5
+  * 1.21.10
+  * 1.21.11
+
+자세한 내용은 [Releases](https://github.com/oni0nfr1/Korigadier/releases)를 확인해 주십시오.
+
 # 사용 방법
+**In build.gradle.kts**
 ```kotlin
-//build.gradle.kts
 repositories {
     mavenCentral()
 }
 
 dependencies {
     //모든 아티팩트는 include()로 포함되거나 ShadowJar를 이용해야 함
-    implementation("io.github.oni0nfr1:korigadier:1.0.0") // 모든 플랫폼 공통
-    implementation("io.github.oni0nfr1:korigadier-paper-1_21_8:1.0.0") // Paper 플러그인을 개발하는 경우
-    modImplementation("io.github.oni0nfr1:korigadier-fabric-1_21_10:1.0.0") // Fabric 모드를 개발하는 경우
+    implementation("io.github.oni0nfr1:korigadier:<version>") // 모든 플랫폼 공통
+    implementation("io.github.oni0nfr1:korigadier-paper-<MinecraftVersion>:<version>") // Paper 플러그인을 개발하는 경우
+    modImplementation("io.github.oni0nfr1:korigadier-fabric-<MinecraftVersion>:<version>") // Fabric 모드를 개발하는 경우
 }
 ```
+**In Paper Plugin**
 ```kotlin
-// in Paper Plugin
 lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
     Korigadier.register(event) {
         literal("team") {
@@ -62,8 +73,8 @@ lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
 라이선스는 기본적으로 MIT 라이선스이나, korigadier-paper 모듈만 GPL-3 라이선스가 적용됩니다.
 ```kotlin
 dependencies {
-    implementation("io.github.oni0nfr1:korigadier:1.0.0") // MIT
-    implementation("io.github.oni0nfr1:korigadier-fabric-1_21_10:1.0.0") // MIT
-    implementation("io.github.oni0nfr1:korigadier-paper-1_21_8:1.0.0") // GPL-3
+    implementation("io.github.oni0nfr1:korigadier:<version>") // MIT
+    implementation("io.github.oni0nfr1:korigadier-fabric-<MinecraftVersion>:<version>") // MIT
+    implementation("io.github.oni0nfr1:korigadier-paper-<MinecraftVersion>:<version>") // GPL-3
 }
 ```

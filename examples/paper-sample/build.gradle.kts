@@ -4,10 +4,13 @@ plugins {
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
+var mc = "1.21.10"
+var mcUnderscore = mc.replace(".", "_")
+
 dependencies {
-    implementation("io.github.oni0nfr1:korigadier:1.0.0")
-    implementation("io.github.oni0nfr1:korigadier-paper-1_21_8:1.0.0")
-    compileOnly(libs.paper.api)
+    implementation(libs.korigadier)
+    implementation("io.github.oni0nfr1:korigadier-paper-$mcUnderscore:${libs.versions.korigadier.get()}")
+    compileOnly("io.papermc.paper:paper-api:$mc-R0.1-SNAPSHOT")
 }
 
 tasks.processResources {
@@ -21,7 +24,7 @@ tasks {
         // Configure the Minecraft version for our task.
         // This is the only required configuration besides applying the plugin.
         // Your plugin's jar (or shadowJar if present) will be used automatically.
-        minecraftVersion("1.21.8")
+        minecraftVersion(mc)
         runDirectory.set(rootProject.layout.projectDirectory.dir("run"))
     }
 }
