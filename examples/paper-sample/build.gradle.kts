@@ -4,13 +4,12 @@ plugins {
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
-var mc = "1.21.10"
-var mcUnderscore = mc.replace(".", "_")
+var mc = "1.21.11"
 
 dependencies {
     implementation(libs.korigadier)
-    implementation("io.github.oni0nfr1:korigadier-paper-$mcUnderscore:${libs.versions.korigadier.get()}")
-    compileOnly("io.papermc.paper:paper-api:$mc-R0.1-SNAPSHOT")
+    implementation("io.github.oni0nfr1:korigadier-paper:${libs.versions.korigadier.get()}")
+    compileOnly($$"io.papermc.paper:paper-api:$$mc-R0.1-SNAPSHOT")
 }
 
 tasks.processResources {

@@ -1,32 +1,28 @@
 plugins {
-    id("fabric-loom") version "1.14-SNAPSHOT"
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.shadow)
     id("com.vanniktech.maven.publish") version "0.35.0"
 }
 
-var mc = "1.21.5"
+var mc = "1.21.11"
 var mcUnderscore = mc.replace(".", "_")
 
 dependencies {
-    api(project(":korigadier"))
-
-    minecraft("com.mojang:minecraft:$mc")
-    mappings(loom.officialMojangMappings())
-
-    modImplementation("net.fabricmc:fabric-loader:0.18.2")
-    modImplementation("net.fabricmc:fabric-language-kotlin:1.13.6+kotlin.2.2.20")
-    modImplementation("net.fabricmc.fabric-api:fabric-api:0.128.2+1.21.5")
-
+    implementation(project(":korigadier"))
+    compileOnly($$"io.papermc.paper:paper-api:$$mc-R0.1-SNAPSHOT")
     testImplementation(kotlin("test"))
 }
 
 kotlin { jvmToolchain(21) }
 
+tasks.build {
+    dependsOn("shadowJar")
+}
+
 mavenPublishing {
-    // 이 라이브러리의 좌표 (GAV)
     coordinates(
         groupId = project.group.toString(),
-        artifactId = "korigadier-fabric-$mcUnderscore",
+        artifactId = "korigadier-paper",
         version = project.version.toString()
     )
 
@@ -40,8 +36,9 @@ mavenPublishing {
 
         licenses {
             license {
-                name.set("MIT License")
-                url.set("https://opensource.org/licenses/MIT")
+                name.set("GNU General Public License v3.0")
+                url.set("https://www.gnu.org/licenses/gpl-3.0-standalone.html")
+                distribution.set("repo")
             }
         }
         developers {

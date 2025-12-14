@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.2.20"
 brigadier = "1.0.18"
-korigadier = "1.0.1"
+korigadier = "1.0.2"
 junit = "5.10.2"
 
 [libraries]

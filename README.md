@@ -7,18 +7,11 @@
 
 Korigadier는 Brigadier를 Kotlin 스타일 DSL로 래핑하여, 명령어를 훨씬 간결하고 읽기 쉽게 작성할 수 있도록 합니다.
 
-## 지원 버전
-* Paper
-  * 1.21.8
-  * 1.21.10
-* Fabric
-  * 1.21.5
-  * 1.21.10
-  * 1.21.11
+## 호환성
+brigadier를 사용하는 모든 시스템에서 호환됩니다.  
+단, Paper의 경우 후술할 호환 브릿지가 포함된 버전이 권장됩니다.
 
-자세한 내용은 [Releases](https://github.com/oni0nfr1/Korigadier/releases)를 확인해 주십시오.
-
-# 사용 방법
+# 사용 방법 (Usage)
 **In build.gradle.kts**
 ```kotlin
 repositories {
@@ -26,16 +19,16 @@ repositories {
 }
 
 dependencies {
-    //모든 아티팩트는 include()로 포함되거나 ShadowJar를 이용해야 함
-    implementation("io.github.oni0nfr1:korigadier:<version>") // 모든 플랫폼 공통
-    implementation("io.github.oni0nfr1:korigadier-paper-<MinecraftVersion>:<version>") // Paper 플러그인을 개발하는 경우
-    modImplementation("io.github.oni0nfr1:korigadier-fabric-<MinecraftVersion>:<version>") // Fabric 모드를 개발하는 경우
+    // use ShadowJar or else to ensure this library is included in your JAR
+    // ShadowJar 등을 이용하여 빌드된 JAR 파일에 이 라이브러리가 포함되게 하십시오.
+    implementation("io.github.oni0nfr1:korigadier-paper:1.0.2") // in Paper Plugin
+    implementation("io.github.oni0nfr1:korigadier:1.0.2") // else
 }
 ```
-**In Paper Plugin**
+**In Fabric Mod**
 ```kotlin
-lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
-    Korigadier.register(event) {
+ClientCommandRegistrationCallback.EVENT.register { dispatcher, _ ->
+    korigadier(event) {
         literal("team") {
             requires { it.sender.hasPermission("team.use") }
             literal("create") {
@@ -44,7 +37,7 @@ lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
                     executes { ctx ->
                         val name = ctx.get<String>("name")
                         ctx.source.sender.sendMessage("팀 ${name}이 생성되었습니다!")
-                        // 팀 생성 로직...
+                        // team create logics...
                         1
                     }
                 }
@@ -59,11 +52,22 @@ lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
                                 player ->
                             ctx.source.sender.sendMessage("플레이어 ${player.name}이 초대되었습니다!")
                         }
-                        // 초대 로직...
+                        // team invitation logics...
                         1
                     }
                 }
             }
+        }
+    }
+}
+```
+**In Paper Plugin**
+```kotlin
+lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
+    korigadier<CommandSourceStack>(event) {
+        literal("team") {
+            requires { it.sender.hasPermission("team.use") }
+            // ... same as above
         }
     }
 }
@@ -73,8 +77,7 @@ lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
 라이선스는 기본적으로 MIT 라이선스이나, korigadier-paper 모듈만 GPL-3 라이선스가 적용됩니다.
 ```kotlin
 dependencies {
-    implementation("io.github.oni0nfr1:korigadier:<version>") // MIT
-    implementation("io.github.oni0nfr1:korigadier-fabric-<MinecraftVersion>:<version>") // MIT
-    implementation("io.github.oni0nfr1:korigadier-paper-<MinecraftVersion>:<version>") // GPL-3
+    implementation("io.github.oni0nfr1:korigadier:1.0.2") // MIT
+    implementation("io.github.oni0nfr1:korigadier-paper:1.0.2") // GPL-3
 }
 ```
