@@ -8,9 +8,9 @@ import io.github.oni0nfr1.korigadier.internal.spec.*
 
 internal object KCompiler {
 
-    fun <S> registerAll(dispatcher: CommandDispatcher<S>, roots: List<KLiteralSpec<S>>) {
+    fun <S> registerAll(dispatcher: CommandDispatcher<S>, roots: List<KNodeSpec<S>>) {
         roots.forEach { root ->
-            dispatcher.root.addChild(compileLiteral(root))
+            dispatcher.root.addChild(compileNode(root))
         }
     }
 

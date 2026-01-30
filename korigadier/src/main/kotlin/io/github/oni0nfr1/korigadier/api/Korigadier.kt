@@ -1,6 +1,7 @@
 package io.github.oni0nfr1.korigadier.api
 
 import com.mojang.brigadier.CommandDispatcher
+import io.github.oni0nfr1.korigadier.api.builder.KRootScope
 
 /**
  * DSL 진입점.

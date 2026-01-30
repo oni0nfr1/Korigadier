@@ -1,7 +1,8 @@
 package io.github.oni0nfr1.korigadier.internal
 
 import com.mojang.brigadier.CommandDispatcher
-import io.github.oni0nfr1.korigadier.api.KRootScope
+import io.github.oni0nfr1.korigadier.api.builder.KRootScope
+import io.github.oni0nfr1.korigadier.internal.builder.KRootScopeImpl
 import io.github.oni0nfr1.korigadier.internal.compiler.KCompiler
 import io.github.oni0nfr1.korigadier.internal.validate.KValidator
 

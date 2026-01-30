@@ -4,7 +4,7 @@ package io.github.oni0nfr1.korigadier.paper
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.tree.CommandNode
 import com.mojang.brigadier.tree.LiteralCommandNode
-import io.github.oni0nfr1.korigadier.api.KRootScope
+import io.github.oni0nfr1.korigadier.api.builder.KRootScope
 import io.papermc.paper.command.brigadier.Commands
 import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent
 import io.papermc.paper.command.brigadier.CommandSourceStack

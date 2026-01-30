@@ -1,6 +1,6 @@
 package io.github.oni0nfr1.korigadier.internal.spec
 
-import io.github.oni0nfr1.korigadier.api.KExec
+import io.github.oni0nfr1.korigadier.api.builder.KExec
 
 internal interface KNodeSpec<S> {
 

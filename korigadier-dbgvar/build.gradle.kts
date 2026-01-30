@@ -1,31 +1,26 @@
-import org.gradle.kotlin.dsl.dependencies
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.shadow)
     id("com.vanniktech.maven.publish") version "0.35.0"
     `java-library`
 }
 
-var mc = "1.21.11"
-var mcUnderscore = mc.replace(".", "_")
-
 dependencies {
-    api(project(":korigadier"))
-    compileOnly($$"io.papermc.paper:paper-api:$$mc-R0.1-SNAPSHOT")
+    implementation(project(":korigadier"))
     testImplementation(kotlin("test"))
+    testImplementation(libs.junit.api)
+    testRuntimeOnly(libs.junit.engine)
 }
 
-kotlin { jvmToolchain(21) }
-
-tasks.build {
-    dependsOn("shadowJar")
+kotlin {
+    jvmToolchain(21)
 }
+
+tasks.test { useJUnitPlatform() }
 
 mavenPublishing {
     coordinates(
         groupId = project.group.toString(),
-        artifactId = "korigadier-paper",
+        artifactId = "korigadier-ext-dbgvar",
         version = project.version.toString()
     )
 
@@ -39,9 +34,8 @@ mavenPublishing {
 
         licenses {
             license {
-                name.set("GNU General Public License v3.0")
-                url.set("https://www.gnu.org/licenses/gpl-3.0-standalone.html")
-                distribution.set("repo")
+                name.set("MIT License")
+                url.set("https://opensource.org/licenses/MIT")
             }
         }
         developers {

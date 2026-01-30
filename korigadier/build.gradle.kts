@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
     id("com.vanniktech.maven.publish") version "0.35.0"
+    `java-library`
 }
 
 dependencies {
-    api(libs.brigadier)           // 공개 표면은 Brigadier만 보이게
+    compileOnlyApi(libs.brigadier)
     testImplementation(kotlin("test"))
     testImplementation(libs.junit.api)
     testRuntimeOnly(libs.junit.engine)

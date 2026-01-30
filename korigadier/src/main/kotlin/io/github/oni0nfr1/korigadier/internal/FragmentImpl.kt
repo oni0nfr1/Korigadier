@@ -1,9 +1,12 @@
 package io.github.oni0nfr1.korigadier.internal
 
 import io.github.oni0nfr1.korigadier.api.Fragment
-import io.github.oni0nfr1.korigadier.api.KArgumentBuilder
-import io.github.oni0nfr1.korigadier.api.KLiteralBuilder
-import io.github.oni0nfr1.korigadier.api.KRootScope
+import io.github.oni0nfr1.korigadier.api.builder.KArgumentBuilder
+import io.github.oni0nfr1.korigadier.api.builder.KLiteralBuilder
+import io.github.oni0nfr1.korigadier.api.builder.KRootScope
+import io.github.oni0nfr1.korigadier.internal.builder.KArgumentBuilderImpl
+import io.github.oni0nfr1.korigadier.internal.builder.KLiteralBuilderImpl
+import io.github.oni0nfr1.korigadier.internal.builder.KRootScopeImpl
 import io.github.oni0nfr1.korigadier.internal.spec.KLiteralSpec
 
 internal class FragmentImpl<S>(

@@ -1,10 +1,10 @@
-package io.github.oni0nfr1.korigadier.internal
+package io.github.oni0nfr1.korigadier.internal.builder
 
 import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.suggestion.SuggestionsBuilder
-import io.github.oni0nfr1.korigadier.api.KArgumentBuilder
-import io.github.oni0nfr1.korigadier.api.KExec
-import io.github.oni0nfr1.korigadier.api.KLiteralBuilder
+import io.github.oni0nfr1.korigadier.api.builder.KArgumentBuilder
+import io.github.oni0nfr1.korigadier.api.builder.KExec
+import io.github.oni0nfr1.korigadier.api.builder.KLiteralBuilder
 import io.github.oni0nfr1.korigadier.internal.spec.KArgumentSpec
 
 internal class KArgumentBuilderImpl<S, T>(

@@ -12,3 +12,4 @@ pluginManagement {
 include("korigadier")
 include("korigadier-paper")
 include("examples:paper-sample")
+include("korigadier-dbgvar")

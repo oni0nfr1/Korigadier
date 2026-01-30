@@ -2,7 +2,7 @@ package io.github.oni0nfr1.korigadier.internal.spec
 
 import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.suggestion.SuggestionsBuilder
-import io.github.oni0nfr1.korigadier.api.KExec
+import io.github.oni0nfr1.korigadier.api.builder.KExec
 
 internal data class KArgumentSpec<S, T>(
     override val name: String,

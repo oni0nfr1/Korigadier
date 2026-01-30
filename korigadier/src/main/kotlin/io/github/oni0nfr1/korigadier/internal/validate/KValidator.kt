@@ -4,8 +4,14 @@ import io.github.oni0nfr1.korigadier.internal.spec.*
 
 internal object KValidator {
 
-    fun <S> validate(roots: List<KLiteralSpec<S>>) {
-        roots.forEach { validateLiteral(it, listOf(it.name)) }
+    fun <S> validate(roots: List<KNodeSpec<S>>) {
+        roots.forEach {
+            if (it is KLiteralSpec<S>) {
+                validateLiteral(it, listOf(it.name))
+            } else if (it is KArgumentSpec<S, *>) {
+                validateArgument(it, listOf(it.name))
+            }
+        }
     }
 
     private fun <S> validateLiteral(node: KLiteralSpec<S>, path: List<String>) {

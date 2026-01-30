@@ -1,9 +1,9 @@
-package io.github.oni0nfr1.korigadier.internal
+package io.github.oni0nfr1.korigadier.internal.builder
 
 import com.mojang.brigadier.arguments.ArgumentType
-import io.github.oni0nfr1.korigadier.api.KArgumentBuilder
-import io.github.oni0nfr1.korigadier.api.KExec
-import io.github.oni0nfr1.korigadier.api.KLiteralBuilder
+import io.github.oni0nfr1.korigadier.api.builder.KArgumentBuilder
+import io.github.oni0nfr1.korigadier.api.builder.KExec
+import io.github.oni0nfr1.korigadier.api.builder.KLiteralBuilder
 import io.github.oni0nfr1.korigadier.internal.spec.KLiteralSpec
 
 internal class KLiteralBuilderImpl<S>(

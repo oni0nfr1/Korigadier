@@ -7,8 +7,7 @@ plugins {
 var mc = "1.21.11"
 
 dependencies {
-    implementation(libs.korigadier)
-    implementation("io.github.oni0nfr1:korigadier-paper:${libs.versions.korigadier.get()}")
+    implementation(project(":korigadier-paper"))
     compileOnly($$"io.papermc.paper:paper-api:$$mc-R0.1-SNAPSHOT")
 }
 
