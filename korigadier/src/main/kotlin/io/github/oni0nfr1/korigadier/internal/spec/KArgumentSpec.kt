@@ -14,12 +14,12 @@ internal data class KArgumentSpec<S, T>(
 ) : KNodeSpec<S> {
     @Suppress("UNCHECKED_CAST")
     fun deepCopyAny(): KArgumentSpec<S, Any?> =
-    KArgumentSpec(
-        name = name,
-        type = type, // ArgumentType<T>는 보통 상태가 없어서 공유 OK
-        exec = exec,
-        predicates = predicates,
-        children = children.map { it.deepCopy() }.toMutableList(),
-        suggests = suggests,
-    ) as KArgumentSpec<S, Any?>
+        KArgumentSpec(
+            name = name,
+            type = type, // ArgumentType<T>는 보통 상태가 없어서 공유 OK
+            exec = exec,
+            predicates = predicates,
+            children = children.map { it.deepCopy() }.toMutableList(),
+            suggests = suggests,
+        ) as KArgumentSpec<S, Any?>
 }

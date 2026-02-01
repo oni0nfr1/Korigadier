@@ -21,14 +21,14 @@ repositories {
 dependencies {
     // use ShadowJar or else to ensure this library is included in your JAR
     // ShadowJar 등을 이용하여 빌드된 JAR 파일에 이 라이브러리가 포함되게 하십시오.
-    implementation("io.github.oni0nfr1:korigadier-paper:1.0.2") // in Paper Plugin
-    implementation("io.github.oni0nfr1:korigadier:1.0.2") // else
+    implementation("io.github.oni0nfr1:korigadier-paper:1.1.0") // in Paper Plugin
+    implementation("io.github.oni0nfr1:korigadier:1.1.0") // else
 }
 ```
 **In Fabric Mod**
 ```kotlin
 ClientCommandRegistrationCallback.EVENT.register { dispatcher, _ ->
-    korigadier(event) {
+    korigadier(dispatcher) {
         literal("team") {
             requires { it.sender.hasPermission("team.use") }
             literal("create") {

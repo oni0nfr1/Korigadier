@@ -5,7 +5,7 @@ plugins {
 
 allprojects {
     group = "io.github.oni0nfr1"
-    version = "1.0.2"
+    version = "1.1.0"
     repositories {
         mavenLocal() // for testing before launching to maven central
         mavenCentral()

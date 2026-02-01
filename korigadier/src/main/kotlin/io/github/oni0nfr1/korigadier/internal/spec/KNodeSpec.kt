@@ -10,6 +10,7 @@ internal interface KNodeSpec<S> {
     val children: MutableList<KNodeSpec<S>>
 
     fun deepCopy(): KNodeSpec<S> = when (this) {
+        is KRootScopeSpec<S> -> this.deepCopy()
         is KLiteralSpec<S> -> this.deepCopy()
         is KArgumentSpec<S, *> -> this.deepCopyAny()
         else -> error("Unknown spec")

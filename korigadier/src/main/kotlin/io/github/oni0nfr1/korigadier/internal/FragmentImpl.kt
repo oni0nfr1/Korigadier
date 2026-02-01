@@ -1,12 +1,10 @@
 package io.github.oni0nfr1.korigadier.internal
 
 import io.github.oni0nfr1.korigadier.api.Fragment
-import io.github.oni0nfr1.korigadier.api.builder.KArgumentBuilder
+import io.github.oni0nfr1.korigadier.api.builder.KCommandBuilder
 import io.github.oni0nfr1.korigadier.api.builder.KLiteralBuilder
-import io.github.oni0nfr1.korigadier.api.builder.KRootScope
-import io.github.oni0nfr1.korigadier.internal.builder.KArgumentBuilderImpl
+import io.github.oni0nfr1.korigadier.internal.builder.KCommandBuilderImpl
 import io.github.oni0nfr1.korigadier.internal.builder.KLiteralBuilderImpl
-import io.github.oni0nfr1.korigadier.internal.builder.KRootScopeImpl
 import io.github.oni0nfr1.korigadier.internal.spec.KLiteralSpec
 
 internal class FragmentImpl<S>(
@@ -14,7 +12,6 @@ internal class FragmentImpl<S>(
 ) : Fragment<S> {
 
     companion object {
-        // API 함수 구현부
         fun <S> create(block: KLiteralBuilder<S>.() -> Unit): FragmentImpl<S> {
             val temp = KLiteralBuilderImpl<S>("<fragment-root>")
             temp.apply(block)
@@ -24,19 +21,8 @@ internal class FragmentImpl<S>(
         }
     }
 
-    override fun attachTo(target: KRootScope<S>) {
-        val r = target as KRootScopeImpl<S>
-        roots.forEach { r.roots += it.deepCopy() }
-    }
-
-    override fun attachTo(target: KLiteralBuilder<S>) {
-        // target은 KLiteralBuilderImpl<S>일 것이므로 spec 접근 필요
-        val t = target as KLiteralBuilderImpl<S>
-        roots.forEach { t.spec.children += it.deepCopy() }
-    }
-
-    override fun attachTo(target: KArgumentBuilder<S, *>) {
-        val t = target as KArgumentBuilderImpl<S, *>
+    override fun attachTo(target: KCommandBuilder<S>) {
+        val t = target as KCommandBuilderImpl<S>
         roots.forEach { t.spec.children += it.deepCopy() }
     }
 }

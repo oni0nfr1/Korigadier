@@ -17,38 +17,38 @@ kotlin {
 
 tasks.test { useJUnitPlatform() }
 
-mavenPublishing {
-    coordinates(
-        groupId = project.group.toString(),
-        artifactId = "korigadier-ext-dbgvar",
-        version = project.version.toString()
-    )
-
-    publishToMavenCentral()
-    signAllPublications()
-
-    pom {
-        name.set("Korigadier")
-        description.set("Kotlin wrapper / DSL for Mojang Brigadier")
-        url.set("https://github.com/oni0nfr1/Korigadier")
-
-        licenses {
-            license {
-                name.set("MIT License")
-                url.set("https://opensource.org/licenses/MIT")
-            }
-        }
-        developers {
-            developer {
-                id.set("oni0nfr1")
-                name.set("Kim Tae Eon")
-                email.set("taeun06@gmail.com")
-            }
-        }
-        scm {
-            url.set("https://github.com/oni0nfr1/Korigadier")
-            connection.set("scm:git:git://github.com/oni0nfr1/Korigadier.git")
-            developerConnection.set("scm:git:ssh://git@github.com:oni0nfr1/Korigadier.git")
-        }
-    }
-}
+//mavenPublishing {
+//    coordinates(
+//        groupId = project.group.toString(),
+//        artifactId = "korigadier-ext-dbgvar",
+//        version = project.version.toString()
+//    )
+//
+//    publishToMavenCentral()
+//    signAllPublications()
+//
+//    pom {
+//        name.set("Korigadier")
+//        description.set("Kotlin wrapper / DSL for Mojang Brigadier")
+//        url.set("https://github.com/oni0nfr1/Korigadier")
+//
+//        licenses {
+//            license {
+//                name.set("MIT License")
+//                url.set("https://opensource.org/licenses/MIT")
+//            }
+//        }
+//        developers {
+//            developer {
+//                id.set("oni0nfr1")
+//                name.set("Kim Tae Eon")
+//                email.set("taeun06@gmail.com")
+//            }
+//        }
+//        scm {
+//            url.set("https://github.com/oni0nfr1/Korigadier")
+//            connection.set("scm:git:git://github.com/oni0nfr1/Korigadier.git")
+//            developerConnection.set("scm:git:ssh://git@github.com:oni0nfr1/Korigadier.git")
+//        }
+//    }
+//}

@@ -1,5 +1,5 @@
 name: paper-sample
-version: '1.0-SNAPSHOT'
+version: '${version}'
 main: io.github.oni0nfr1.paperSample.PaperSample
 api-version: '1.21'
 authors: [oni0nfr1]

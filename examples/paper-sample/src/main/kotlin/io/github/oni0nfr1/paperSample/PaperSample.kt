@@ -21,5 +21,6 @@ class PaperSample : JavaPlugin() {
                 }
             }
         }
+        logger.info("Load Complete.")
     }
 }

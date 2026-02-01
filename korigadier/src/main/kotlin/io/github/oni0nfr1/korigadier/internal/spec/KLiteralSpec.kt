@@ -11,12 +11,12 @@ internal data class KLiteralSpec<S>(
     var examples: List<String> = emptyList()
 ) : KNodeSpec<S> {
     override fun deepCopy(): KLiteralSpec<S> =
-    KLiteralSpec(
-        name = name,
-        exec = exec,
-        predicates = predicates.toMutableList(),
-        children = children.map { it.deepCopy() }.toMutableList(),
-        description = description,
-        examples = examples.toList()
-    )
+        KLiteralSpec(
+            name = name,
+            exec = exec,
+            predicates = predicates.toMutableList(),
+            children = children.map { it.deepCopy() }.toMutableList(),
+            description = description,
+            examples = examples.toList()
+        )
 }
