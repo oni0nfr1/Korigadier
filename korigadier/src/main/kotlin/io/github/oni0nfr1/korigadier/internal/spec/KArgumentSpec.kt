@@ -1,8 +1,8 @@
 package io.github.oni0nfr1.korigadier.internal.spec
 
 import com.mojang.brigadier.arguments.ArgumentType
-import com.mojang.brigadier.suggestion.SuggestionsBuilder
 import io.github.oni0nfr1.korigadier.api.builder.KExec
+import io.github.oni0nfr1.korigadier.api.builder.SuggestionsBuilderFunc
 
 internal data class KArgumentSpec<S, T>(
     override val name: String,
@@ -10,7 +10,7 @@ internal data class KArgumentSpec<S, T>(
     override var exec: KExec<S>? = null,
     override val predicates: MutableList<(S) -> Boolean> = mutableListOf(),
     override val children: MutableList<KNodeSpec<S>> = mutableListOf(),
-    var suggests: ((SuggestionsBuilder, S) -> Unit)? = null,
+    var suggests: MutableList<SuggestionsBuilderFunc<S>> = mutableListOf(),
 ) : KNodeSpec<S> {
     @Suppress("UNCHECKED_CAST")
     fun deepCopyAny(): KArgumentSpec<S, Any?> =

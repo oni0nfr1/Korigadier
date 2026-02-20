@@ -7,6 +7,11 @@ interface KLiteralBuilder<S> : KCommandBuilder<S> {
     fun requires(predicate: (S) -> Boolean)
     fun executes(exec: KExec<S>)
 
-    // 선택: 헬프/문서화를 위한 메타
+    /**
+     * 구현되지 않았으며, **아무 동작도 하지 않습니다.**
+     *
+     * **추후 구현보다는 제거될 가능성이 높습니다.**
+     */
+    @Deprecated("")
     fun meta(description: String? = null, examples: List<String> = emptyList())
 }

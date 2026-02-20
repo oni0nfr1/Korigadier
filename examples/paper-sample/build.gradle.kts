@@ -4,7 +4,7 @@ plugins {
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
-var mc = "1.21.11"
+var mc = "1.21.10"
 
 dependencies {
     implementation(project(":korigadier-paper"))
@@ -12,7 +12,7 @@ dependencies {
 }
 
 tasks.processResources {
-    filesMatching("paper-plugin.yml") {
+    filesMatching("plugin.yml") {
         expand("version" to project.version)
     }
 }

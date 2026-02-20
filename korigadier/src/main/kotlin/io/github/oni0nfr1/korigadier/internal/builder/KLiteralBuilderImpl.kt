@@ -18,6 +18,7 @@ internal class KLiteralBuilderImpl<S>(
         spec.exec = exec
     }
 
+    @Deprecated("")
     override fun meta(description: String?, examples: List<String>) {
         spec.description = description
         spec.examples = examples

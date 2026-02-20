@@ -31,7 +31,7 @@ internal object KCompiler {
     private fun <S> compileNode(spec: KNodeSpec<S>): CommandNode<S> = when (spec) {
         is KLiteralSpec<S> -> compileLiteral(spec)
         is KArgumentSpec<S, *> -> compileArgument(spec as KArgumentSpec<S, Any?>)
-        else -> error("Unknown spec: $spec")
+        else -> error("Invalid spec: $spec")
     }
 
     private fun <S> compileArgument(spec: KArgumentSpec<S, Any?>): CommandNode<S> {
@@ -40,15 +40,12 @@ internal object KCompiler {
             b.requires { s -> spec.predicates.all { it(s) } }
         } // 권한 제한 적용
 
-        spec.suggests?.let { provider ->
-            b.suggests { ctx, builder ->
-                @Suppress("UNCHECKED_CAST")
-                provider(builder, ctx.source as S)
-                java.util.concurrent.CompletableFuture.completedFuture(builder.build())
-            }
+        b.suggests { ctx, builder ->
+            spec.suggests.forEach { it.invoke(builder, ctx.source) }
+            java.util.concurrent.CompletableFuture.completedFuture(builder.build())
         } // 추천 적용
 
-        spec.exec?.let { exec -> b.executes { ctx -> exec(ctx) } } // 실행 로직 적용
+        spec.exec?.let { exec -> b.executes(exec) } // 실행 로직 적용
 
         spec.children.forEach { child -> b.then(compileNode(child)) } // 하위 노드도 연쇄 컴파일
         return b.build()

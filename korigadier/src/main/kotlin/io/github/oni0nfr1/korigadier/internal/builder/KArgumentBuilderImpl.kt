@@ -4,6 +4,7 @@ import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.suggestion.SuggestionsBuilder
 import io.github.oni0nfr1.korigadier.api.builder.KArgumentBuilder
 import io.github.oni0nfr1.korigadier.api.builder.KExec
+import io.github.oni0nfr1.korigadier.api.builder.SuggestionsBuilderFunc
 import io.github.oni0nfr1.korigadier.internal.spec.KArgumentSpec
 
 internal class KArgumentBuilderImpl<S, T>(
@@ -17,8 +18,12 @@ internal class KArgumentBuilderImpl<S, T>(
         spec.predicates += predicate
     }
 
-    override fun suggests(provider: SuggestionsBuilder.(S) -> Unit) {
-        spec.suggests = { b, s -> provider(b, s) }
+    override fun suggests(vararg suggestions: String) {
+        spec.suggests += { _ -> suggestions.forEach { suggest(it) } }
+    }
+
+    override fun suggests(provider: SuggestionsBuilderFunc<S>) {
+        spec.suggests += provider
     }
 
     override fun executes(exec: KExec<S>) {
